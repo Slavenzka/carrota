@@ -1,0 +1,24 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.label {
+  @include colorFontSelectable;
+
+  display: block;
+  padding: 0.7rem 0.6rem;
+  text-align: center;
+  background-color: $colorBgPassive;
+  border: 0.1rem solid transparent;
+  border-radius: 0.4rem;
+  transition-duration: $transitionDuration;
+  cursor: pointer;
+}
+
+.input {
+  &:checked + .label {
+    @include colorFontSelectable(true);
+
+    background-color: transparent;
+    border-color: $colorBorderActive;
+  }
+}

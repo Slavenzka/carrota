@@ -1,0 +1,36 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-row-gap: 1.2rem;
+  padding: 1.7rem var(--padding-h-elements) 1.1rem var(--padding-h-elements);
+  background-color: $colorBgPassive;
+  border-radius: 0.04rem;
+}
+
+.key {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+}
+
+.value {
+  @include fontValue;
+
+  margin: 0;
+}
+
+.select {
+  margin-left: auto;
+}
+
+.legend {
+  @include fontHint;
+
+  grid-column: 1 / -1;
+  margin: 0;
+  width: 100%;
+  text-align: right;
+  border-top: 0.1rem solid $colorBorderMain;
+}

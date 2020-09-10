@@ -1,0 +1,126 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  padding-top: 5.5rem;
+}
+
+.total {
+  @include fontResult;
+
+  margin: 0;
+  opacity: 0.8;
+
+  .quantity {
+    color: $colorHighlight;
+  }
+}
+
+.table {
+  margin-top: 5rem;
+  width: 100%;
+  color: white;
+  border: 0.1rem solid $colorBorderMain;
+  border-collapse: collapse;
+
+  tr:not(:last-child) {
+    .cell {
+      padding-bottom: 1.8rem;
+    }
+  }
+
+  tr:last-child {
+    .cell {
+      padding-bottom: 6.6rem;
+    }
+  }
+}
+
+.heading,
+.cell {
+  padding-top: 0;
+  padding-left: 4.2rem;
+  padding-right: 4.2rem;
+
+  &:not(:last-child) {
+    border-right: 0.1rem solid $colorBorderMain;
+  }
+}
+
+.heading {
+  @include fontMenu(300, $colorFontDarker5);
+
+  margin: 0;
+  padding-top: 4.8rem;
+  padding-bottom: 1.2rem;
+  text-align: left;
+}
+
+.cell {
+  @include fontNavigation;
+
+  &:first-child {
+    display: flex;
+    align-items: center;
+  }
+
+  .tag {
+    position: absolute;
+    right: -5rem;
+    top: 0;
+    margin-left: 1rem;
+  }
+}
+
+.cellHighlightened {
+  color: $colorHighlight;
+}
+
+.content {
+  position: relative;
+}
+
+.logo {
+  margin-right: 0.8rem;
+  width: 1.8rem;
+}
+
+@media (max-width: $adaptiveMax) {
+  .wrapper {
+    padding-top: 4.6rem;
+  }
+
+  .total {
+    .quantity {
+      display: block;
+    }
+  }
+
+  .tableAdaptiveWrapper {
+    padding: 0 calc(-1 * var(--padding-h-inner));
+  }
+
+  .table {
+    width: max-content;
+    tr:last-child {
+      .cell {
+        padding-bottom: 4.5rem;
+      }
+    }
+  }
+
+  .heading,
+  .cell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .heading {
+    padding-bottom: 1.3rem;
+    width: 16rem;
+
+    &:last-child {
+      width: 20rem;
+    }
+  }
+}

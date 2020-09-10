@@ -1,0 +1,82 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 46.9rem 1fr;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.2rem 0;
+}
+
+.calculator {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.selectLang {
+  margin-left: auto;
+}
+
+.content {
+  padding-top: 4rem;
+}
+
+.form {
+  margin-top: 4rem;
+}
+
+.navigation {
+  position: relative;
+  background-color: $colorBgLight;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 3.999rem;
+    height: 100%;
+    background-color: $colorBgLight;
+  }
+}
+
+@media (max-width: $adaptiveMax) {
+  .wrapper {
+    display: block;
+
+    .header {
+      padding: 3.5rem 0;
+    }
+
+    .buttonScroll {
+      @include resetButton;
+      @include fontMenu(500, $colorLightest);
+
+      margin-right: 3rem;
+      margin-left: auto;
+      opacity: 0.6;
+    }
+
+    .buttonBurger {
+      margin-left: 2rem;
+    }
+  }
+
+  .calculator {
+    position: static;
+    overflow: auto;
+  }
+
+
+  .navigation {
+    &::before {
+      display: none;
+    }
+  }
+}

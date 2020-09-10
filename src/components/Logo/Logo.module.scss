@@ -1,0 +1,8 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.logo {
+  @include fontLogo;
+
+  margin: 0;
+}
