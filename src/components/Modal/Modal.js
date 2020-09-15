@@ -18,7 +18,6 @@ const Modal = () => {
 
   useEffect(() => {
     if (status && deviceType === DeviceTypes.ADAPTIVE) {
-      console.log(modalRef.current)
       disableBodyScroll(modalRef.current)
     } else {
       clearAllBodyScrollLocks()

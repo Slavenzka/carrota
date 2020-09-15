@@ -13,10 +13,13 @@ import { useForm } from 'react-hook-form'
 import { Collapse } from 'react-collapse/lib/Collapse'
 import SettingsBlock from 'components/SettingsBlock/SettingsBlock'
 import Button from 'components/Button/Button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import IconLightning from 'assets/icons/IconLightning'
+import { toggleModal } from 'store/actions'
+import ModalWallet from 'components/Modal/ModalWallet/ModalWallet'
 
 const ExchangeIntroForm = ({ className, deviceType }) => {
+  const dispatch = useDispatch()
   const [isCollapseOpened, toggleCollapseStatus] = useState(false)
   const isWalletConnected = useSelector(state => state.data.isWalletConnected)
 
@@ -26,7 +29,11 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
   // const radioFee = watch('radio input gas-fee')
   // const inputFee = watch('manual input gas-fee')
 
-  const handleButtonClick = () => {
+  const handleExchangeClick = () => {
+  }
+
+  const handleConnectClick = () => {
+    dispatch(toggleModal(true, <ModalWallet />))
   }
 
   const handleClickToggle = () => {
@@ -105,14 +112,12 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
             setValue={setValue}
           />
         </Collapse>
-        {isWalletConnected &&
-          <Button
-            className={css.button}
-            label='Exchange now'
-            type='button'
-            onClick={handleButtonClick}
-          />
-        }
+        <Button
+          className={css.button}
+          label={isWalletConnected ? 'Exchange now' : 'Connect Your Wallet'}
+          type='button'
+          onClick={isWalletConnected ? handleExchangeClick : handleConnectClick}
+        />
       </form>
     </div>
   )
