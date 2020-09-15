@@ -1,0 +1,46 @@
+// screen sizes
+$adaptiveMax: 1279px;
+
+// colors
+
+  // fonts
+$colorFontDarker1: rgba(255, 255, 255, 0.9);
+$colorFontDarker2: rgba(255, 255, 255, 0.6);
+$colorFontDarker3: rgba(255, 255, 255, 0.4);
+$colorFontDarker4: rgba(255, 255, 255, 0.3);
+$colorFontDarker5: rgba(255, 255, 255, 0.25);
+
+  // backgrounds
+$colorBgMain: rgb(0, 0, 0);
+$colorBgLight: rgb(24, 24, 24);
+$colorBgPassive: rgba(216, 216, 216, 0.11);
+
+  // common
+$colorLightest: rgb(255, 255, 255);
+$colorHighlight: rgb(248, 148, 30);
+
+  // borders
+$colorBorderMain: rgb(32, 32, 32);
+$colorBorderPassive: rgb(151, 151, 151);
+$colorBorderActive: rgba(248, 148, 30, 0.4);
+$colorBorderDark: rgb(92, 44, 31);
+
+  // shadows
+$shadowControl: 0 0.2rem 2rem 0 rgba(224, 89, 75, 0.65);
+$shadowButton: 0 0.2rem 2rem 0 rgba(248, 148, 30, 0.36);
+
+  // misc
+$colorScrollbar: rgb(156, 156, 156);
+
+// transitions
+$transitionDuration: 0.3s;
+
+// spaces
+:root {
+  --padding-h-inner: 6.2rem;
+  --padding-h-elements: 2rem;
+
+  @media (max-width: $adaptiveMax) {
+    --padding-h-inner: 2rem;
+  }
+}
