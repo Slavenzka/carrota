@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d4cf5e7aa108cdf489426b2f5d744d5",
+    "revision": "968b865f2bcb7757aafc317f61c43d74",
     "url": "/carrota/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/carrota/static/css/2.769dd305.chunk.css"
   },
   {
-    "revision": "a203bb2dc945483ef94d",
-    "url": "/carrota/static/css/main.30ca9774.chunk.css"
+    "revision": "9ba10bff6094cdc228c1",
+    "url": "/carrota/static/css/main.fa5c98c3.chunk.css"
   },
   {
     "revision": "14fb334bc6ebcb7c237f",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/carrota/static/js/2.a73147c6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a203bb2dc945483ef94d",
-    "url": "/carrota/static/js/main.98d89184.chunk.js"
+    "revision": "9ba10bff6094cdc228c1",
+    "url": "/carrota/static/js/main.f3fc88e0.chunk.js"
   },
   {
     "revision": "74bdc9542dd344e8c42e",

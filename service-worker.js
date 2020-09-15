@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/carrota/precache-manifest.a14cfc18bed85d6ac754aae89234064e.js"
+  "/carrota/precache-manifest.84704d460fa0c08b8d0ebc3e201cefdc.js"
 );
 
 self.addEventListener('message', (event) => {
