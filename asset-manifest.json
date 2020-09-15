@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/carrota/static/css/main.30ca9774.chunk.css",
+    "main.js": "/carrota/static/js/main.98d89184.chunk.js",
+    "main.js.map": "/carrota/static/js/main.98d89184.chunk.js.map",
+    "runtime-main.js": "/carrota/static/js/runtime-main.cd3122b7.js",
+    "runtime-main.js.map": "/carrota/static/js/runtime-main.cd3122b7.js.map",
+    "static/css/2.769dd305.chunk.css": "/carrota/static/css/2.769dd305.chunk.css",
+    "static/js/2.a73147c6.chunk.js": "/carrota/static/js/2.a73147c6.chunk.js",
+    "static/js/2.a73147c6.chunk.js.map": "/carrota/static/js/2.a73147c6.chunk.js.map",
+    "index.html": "/carrota/index.html",
+    "precache-manifest.a14cfc18bed85d6ac754aae89234064e.js": "/carrota/precache-manifest.a14cfc18bed85d6ac754aae89234064e.js",
+    "service-worker.js": "/carrota/service-worker.js",
+    "static/css/2.769dd305.chunk.css.map": "/carrota/static/css/2.769dd305.chunk.css.map",
+    "static/css/main.30ca9774.chunk.css.map": "/carrota/static/css/main.30ca9774.chunk.css.map",
+    "static/js/2.a73147c6.chunk.js.LICENSE.txt": "/carrota/static/js/2.a73147c6.chunk.js.LICENSE.txt",
+    "static/media/common.scss": "/carrota/static/media/SFProDisplay-Regular.abe60269.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cd3122b7.js",
+    "static/css/2.769dd305.chunk.css",
+    "static/js/2.a73147c6.chunk.js",
+    "static/css/main.30ca9774.chunk.css",
+    "static/js/main.98d89184.chunk.js"
+  ]
+}
