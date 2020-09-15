@@ -20,8 +20,6 @@ const InfoBlock = ({
   isWalletConnected,
 }) => {
   const currency = selectedCurrency || defaultCurrency
-  console.log(options)
-  console.log(currency)
   const filteredOptions = options.filter(item => item.value !== currency.value)
 
   const icon = <CurrencyLogo type={currency.value} />

@@ -27,7 +27,6 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
   // const inputFee = watch('manual input gas-fee')
 
   const handleButtonClick = () => {
-
   }
 
   const handleClickToggle = () => {
