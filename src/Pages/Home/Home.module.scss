@@ -24,7 +24,14 @@
 }
 
 .content {
+  position: relative;
   padding-top: 4rem;
+}
+
+.wallet {
+  @include fontWallet;
+
+  margin: 2rem 0 0 0;
 }
 
 .form {

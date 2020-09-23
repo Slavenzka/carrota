@@ -17,6 +17,7 @@ import Navigation from 'components/Navigation/Navigation'
 const Home = () => {
   const summaryRef = useRef(null)
   const deviceType = useSelector(state => state.elastic.deviceType)
+  const userWallet = useSelector(state => state.data.userWallet)
   const dispatch = useDispatch()
 
   const createSummaryRef = node => summaryRef.current = node
@@ -61,6 +62,11 @@ const Home = () => {
           </header>
           <div className={css.content}>
             <Heading label='Smart Exchange' />
+            {userWallet &&
+              <p className={css.wallet}>
+                { `You have connected wallet: ${userWallet}` }
+              </p>
+            }
             <ExchangeIntroForm deviceType={deviceType} className={css.form} />
           </div>
           <Modal />

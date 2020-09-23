@@ -22,7 +22,7 @@ const store = createStore(rootReducer,applyMiddleware(thunk))
 
 const Content = (
   <Provider store={store}>
-    <BrowserRouter basename='/carrota/static/'>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>

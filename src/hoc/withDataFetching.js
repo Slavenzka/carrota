@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import axiosHugs from 'axiosHugs'
+import axiosCarrota from 'axiosCarrota'
 import {
   saveData,
   setBasicFilterProperty,
@@ -30,7 +30,7 @@ const withDataFetching = (WrappedComponent, options) => {
         ...state,
         isLoading: true
       }))
-      axiosHugs.post(`${url}`)
+      axiosCarrota.post(`${url}`)
         .then(response => {
           const fetchedData = response.data.result && response.data.result.totalPages
             ? response.data.result.content

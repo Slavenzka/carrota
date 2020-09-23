@@ -19,14 +19,14 @@ export const LangOptions = [
 
 export const CurrencyOptions = [
   {
-    label: 'BTC',
-    value: 'BTC',
+    label: 'ETH',
+    value: 'ETH',
     descriptor: '0xBitcoin Token',
     icon: IconBitcoin
   },
   {
-    label: 'ELET',
-    value: 'ELET',
+    label: 'DAI',
+    value: 'DAI',
     icon: IconEthereum,
     descriptor: 'Elementeum Games'
   },

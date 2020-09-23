@@ -4,6 +4,7 @@
 .button {
   @include resetButton;
   display: block;
+  text-align: center;
 }
 
 .buttonBasic {

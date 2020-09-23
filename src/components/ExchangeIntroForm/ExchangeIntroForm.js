@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import css from './ExchangeIntroForm.module.scss'
 import classnames from 'classnames'
 import InfoBlock from 'components/InfoBlock/InfoBlock'
@@ -17,11 +17,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import IconLightning from 'assets/icons/IconLightning'
 import { toggleModal } from 'store/actions'
 import ModalWallet from 'components/Modal/ModalWallet/ModalWallet'
+import axiosCarrota from 'axiosCarrota'
 
 const ExchangeIntroForm = ({ className, deviceType }) => {
   const dispatch = useDispatch()
   const [isCollapseOpened, toggleCollapseStatus] = useState(false)
-  const isWalletConnected = useSelector(state => state.data.isWalletConnected)
+  const userWallet = useSelector(state => state.data.userWallet)
 
   const { register, control, watch, setValue } = useForm()
   const selectedSource = watch('source')
@@ -42,6 +43,21 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
     setValue('result', container)
   }
 
+  useEffect(() => {
+    if (userWallet) {
+      const data = {
+        amount: 1,
+        from: selectedSource.value,
+        to: selectedResult.value
+      }
+
+      axiosCarrota.post('/exchange/estimate', data)
+        .then(response => {
+          console.log(response)
+        })
+    }
+  }, [userWallet])
+
   return (
     <div className={classnames(css.wrapper, className)}>
       <form>
@@ -58,20 +74,20 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
             className={css.item}
             namespace='source'
             options={CurrencyOptions}
-            defaultCurrency={CurrencyOptions.find(item => item.value === 'BTC')}
+            defaultCurrency={CurrencyOptions.find(item => item.value === 'ETH')}
             selectedCurrency={selectedSource}
             control={control}
             label='You have'
             value={0.3}
             legend='≈ 0.3'
             balance={`$ 30 000`}
-            isWalletConnected={isWalletConnected}
+            isWalletConnected={userWallet}
           />
           <InfoBlock
             className={css.item}
             namespace='result'
             options={CurrencyOptions}
-            defaultCurrency={CurrencyOptions.find(item => item.value === 'ELET')}
+            defaultCurrency={CurrencyOptions.find(item => item.value === 'DAI')}
             selectedCurrency={selectedResult}
             control={control}
             label='You get'
@@ -114,9 +130,9 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
         </Collapse>
         <Button
           className={css.button}
-          label={isWalletConnected ? 'Exchange now' : 'Connect Your Wallet'}
+          label={userWallet ? 'Exchange now' : 'Connect Your Wallet'}
           type='button'
-          onClick={isWalletConnected ? handleExchangeClick : handleConnectClick}
+          onClick={userWallet ? handleExchangeClick : handleConnectClick}
         />
       </form>
     </div>

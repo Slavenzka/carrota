@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './Button.module.scss'
 import classnames from 'classnames'
-import { Link } from 'react-router-dom'
+import Link from 'components/Link/Link'
 
 export const ButtonTypes = {
   BASIC: 'basic',
@@ -16,6 +16,7 @@ const Button = ({
   type = 'button',
   buttonStyle = ButtonTypes.BASIC,
   url,
+  ...props
 }) => {
   return url
     ? (
@@ -25,6 +26,7 @@ const Button = ({
           [css.buttonBordered]: buttonStyle === ButtonTypes.BORDERED,
         })}
         to={url}
+        {...props}
       >
         { label }
       </Link>

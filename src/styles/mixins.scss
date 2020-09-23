@@ -107,6 +107,14 @@
   }
 }
 
+@mixin fontWallet {
+  font-family: 'SF Pro Display', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.4rem;
+  color: $colorLightest;
+}
+
 @mixin fontTag {
   font-family: 'SF Pro Display', Arial, sans-serif;
   font-size: 1.1rem;
