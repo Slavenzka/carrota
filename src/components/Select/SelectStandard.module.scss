@@ -79,7 +79,7 @@
   :global {
     .select {
       &__value-container {
-        min-width: 6rem;
+        min-width: 8rem;
       }
 
       &__menu {
@@ -92,6 +92,7 @@
       &__option,
       &__option--is-fucused {
         padding: 0;
+        height: 100%;
       }
     }
   }

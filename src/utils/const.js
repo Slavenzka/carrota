@@ -1,6 +1,3 @@
-import IconBitcoin from 'assets/icons/IconBitcoin'
-import IconEthereum from 'assets/icons/IconEthereum'
-
 export const DeviceTypes = {
   DESKTOP: 'desktop',
   ADAPTIVE: 'adaptive'
@@ -14,21 +11,6 @@ export const LangOptions = [
   {
     label: 'Ukrainian',
     value: 'UA'
-  },
-]
-
-export const CurrencyOptions = [
-  {
-    label: 'ETH',
-    value: 'ETH',
-    descriptor: '0xBitcoin Token',
-    icon: IconBitcoin
-  },
-  {
-    label: 'DAI',
-    value: 'DAI',
-    icon: IconEthereum,
-    descriptor: 'Elementeum Games'
   },
 ]
 
@@ -73,3 +55,12 @@ export const priceSlippageOptions = [
     value: '3%',
   },
 ]
+
+export const LoadingStates = {
+  TOKENS_LOADING: 'TOKENS_LOADING',
+  TOKENS_LOADED: 'TOKENS_LOADED',
+  TOKENS_LOAD_ERROR: 'TOKENS_LOAD_ERROR',
+  ESTIMATE_LOADING: 'ESTIMATE_LOADING',
+  ESTIMATE_LOADED: 'ESTIMATE_LOADED',
+  ESTIMATE_ERROR: 'ESTIMATE_ERROR',
+}

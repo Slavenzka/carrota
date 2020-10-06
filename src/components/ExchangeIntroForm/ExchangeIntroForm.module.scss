@@ -1,75 +1,6 @@
 @import "styles/variables";
 @import "styles/mixins";
 
-@keyframes thunderStrike {
-  0% {
-    fill: $colorHighlight;
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  40% {
-    opacity: 0;
-    transform: rotate(180deg) scale(0.2) translateY(-2.5rem);
-  }
-
-  75% {
-    fill: $colorHighlight;
-    opacity: 1;
-    transform: rotate(0deg) scale(1) translateY(-2.5rem);
-  }
-
-  80% {
-    fill: $colorBgMain;
-    transform: translateY(0.5rem);
-  }
-
-  100% {
-    fill: $colorHighlight;
-    transform: translateY(0);
-  }
-}
-
-@keyframes largeTriangle {
-  0% {
-    top: 1rem;
-    transform: rotate(0deg);
-    opacity: 0;
-  }
-
-  50% {
-    top: 2rem;
-    opacity: 1;
-  }
-
-  99% {
-    top: -2.5rem;
-    transform: rotate(360deg) translateY(0);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes background {
-  0% {
-    background-color: $colorBgMain;
-  }
-
-  53% {
-    background-color: $colorBgMain;
-  }
-
-  55% {
-    background-color: $colorHighlight;
-  }
-
-  60% {
-    background-color: $colorBgMain;
-  }
-}
-
 .wrapper {
   padding-bottom: 6rem;
 
@@ -78,99 +9,12 @@
   }
 }
 
+.preloader {
+  height: 10rem;
+}
+
 .currencies {
   position: relative;
-}
-
-.item {
-  &:not(:first-child) {
-    margin-top: 0.5rem;
-  }
-}
-
-.buttonToggle {
-  @include resetButton;
-
-  position: absolute;
-  top: 10.5rem;
-  left: calc(50% - 3.5rem / 2);
-  width: 4rem;
-  height: 4rem;
-  background-color: $colorBgMain;
-  border-radius: 50%;
-  transition-duration: $transitionDuration;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    border-top: 1rem solid $colorHighlight;
-    border-right: 1rem solid transparent;
-    border-left: 1rem solid transparent;
-    opacity: 0;
-  }
-
-  &:hover {
-    animation-name: background;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-
-    &::before {
-      animation-name: largeTriangle;
-      animation-duration: 1s;
-      animation-fill-mode: forwards;
-      transform-origin: center;
-      animation-play-state: running;
-    }
-
-    .icon {
-      polygon {
-        animation: thunderStrike 1s;
-        animation-fill-mode: forwards;
-        transform-origin: center;
-      }
-      //polygon {
-      //  fill: transparent;
-      //  stroke: $colorHighlight;
-      //  opacity: 0.3;
-      //}
-    }
-  }
-}
-
-.icon {
-  position: relative;
-  width: 2.1rem;
-
-  polygon {
-    fill: $colorHighlight;
-    transition-duration: $transitionDuration;
-  }
-
-  path {
-    fill: rgba(248, 148, 30, 0);
-    transition-duration: $transitionDuration;
-  }
-}
-
-.buttonCollapse {
-  @include resetButton;
-  @include fontKey;
-
-  margin-top: 2.5rem;
-  border-bottom: 0.1rem dashed $colorBorderDark;
-  transition-duration: $transitionDuration;
-
-  &:hover {
-    color: $colorLightest;
-    border-bottom-color: transparent;
-  }
-}
-
-.collapseContent {
-  padding-top: 1.7rem;
 }
 
 .settings {

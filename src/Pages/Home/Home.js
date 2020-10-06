@@ -27,7 +27,6 @@ const Home = () => {
   }
 
   const handleClickScroll = () => {
-    console.log(summaryRef.current)
     const target = summaryRef.current
     const scrollDistance = target.getBoundingClientRect().top + window.pageYOffset
 
@@ -67,7 +66,10 @@ const Home = () => {
                 { `You have connected wallet: ${userWallet}` }
               </p>
             }
-            <ExchangeIntroForm deviceType={deviceType} className={css.form} />
+            <ExchangeIntroForm
+              deviceType={deviceType}
+              className={css.form}
+            />
           </div>
           <Modal />
         </ContainerInner>

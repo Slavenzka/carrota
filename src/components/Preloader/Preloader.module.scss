@@ -1,0 +1,51 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jumpLogo {
+  0% {
+    top: -2rem;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    top: 0;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    top: -2rem;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  @include fontLogo;
+}
+
+.logo {
+  position: relative;
+  margin: 0 0.5rem 0 0.25rem;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  animation-name: rotateLogo, jumpLogo;
+  animation-duration: 3s, 0.6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: center;
+}

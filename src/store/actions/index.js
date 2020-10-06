@@ -9,5 +9,10 @@ export {
 } from './ui'
 
 export {
-  connectWallet
+  setLoadingState,
+  connectWallet,
+  getWalletBalance,
+  getTokens,
+  getExchangeEstimate,
+  setSearchQuery
 } from './data'

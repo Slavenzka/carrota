@@ -1,28 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from './InfoBlock.module.scss'
 import classnames from 'classnames'
 import Heading, { HeadingTypes } from 'components/Heading/Heading'
-import CurrencyLogo, { CurrencyTypes } from 'components/CurrencyLogo/CurrencyLogo'
+import CurrencyLogo from 'components/CurrencyLogo/CurrencyLogo'
 import SelectStandard, { SelectStyleTypes } from 'components/Select/SelectStandard'
 import { Controller } from 'react-hook-form'
+import Input, { InputTypes } from 'components/Input/Input'
 
 const InfoBlock = ({
   className,
   control,
+  register,
   label = 'Some label',
   namespace,
-  value = 'Some value',
-  defaultCurrency = CurrencyTypes.BITCOIN,
+  amount,
+  defaultCurrency,
   selectedCurrency,
   legend = 'Some legend data',
   options,
   balance,
   isWalletConnected,
+  isInputDisabled,
+  setValue,
+  getValues,
+  menuIsOpen
 }) => {
   const currency = selectedCurrency || defaultCurrency
   const filteredOptions = options.filter(item => item.value !== currency.value)
 
   const icon = <CurrencyLogo type={currency.value} />
+
+  useEffect(() => {
+    const value = parseFloat(amount).toFixed(2)
+    const existingValue = +getValues()[`${namespace}-input`]
+    const isValueChanged = +existingValue !== +value
+
+    if (isValueChanged) {
+      setValue(`${namespace}-input`, value)
+    }
+  }, [amount, namespace, setValue, getValues])
 
   return (
     <div className={classnames(css.wrapper, className)}>
@@ -33,10 +49,15 @@ const InfoBlock = ({
         size={HeadingTypes.size.SMALL}
         tag='h2'
       />
-      <p className={css.value}>
-        { value }
-      </p>
-      {balance && isWalletConnected &&
+      <Input
+        className={css.input}
+        register={register}
+        name={`${namespace}-input`}
+        defaultValue={amount}
+        isDisabled={isInputDisabled}
+        inputType={InputTypes.CALCULATOR}
+      />
+      {!isNaN(balance) && isWalletConnected &&
         <p className={css.balance}>
           { `Available balance: ${balance}` }
         </p>
@@ -50,6 +71,8 @@ const InfoBlock = ({
         options={filteredOptions}
         icon={icon}
         type={SelectStyleTypes.CURRENCY}
+        isCalculator
+        menuIsOpen={menuIsOpen}
       />
       <p className={css.legend}>
         { legend }

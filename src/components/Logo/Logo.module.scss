@@ -4,5 +4,14 @@
 .logo {
   @include fontLogo;
 
+  display: flex;
+  align-items: center;
   margin: 0;
+}
+
+.logoImg {
+  margin-right: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
 }

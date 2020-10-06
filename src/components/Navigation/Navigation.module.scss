@@ -3,15 +3,11 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 100%;
 }
 
 .item {
-  &:first-child {
-    margin-left: auto;
-  }
-
   &:not(:first-child) {
     margin-left: 4rem;
   }
