@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import SettingsBlock from 'components/SettingsBlock/SettingsBlock'
 import Button from 'components/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTokens, toggleModal } from 'store/actions'
+import { getTokens, setLoadingState, toggleModal } from 'store/actions'
 import ModalWallet from 'components/Modal/ModalWallet/ModalWallet'
 import axiosCarrota from 'axiosCarrota'
 import IconBitcoin from 'assets/icons/IconBitcoin'
@@ -19,68 +19,99 @@ import Customization from 'Pages/Home/Customization/Customization'
 import Preloader from 'components/Preloader/Preloader'
 import Calculator from 'Pages/Home/Calculator/Calculator'
 import useDebounce from 'hooks/useDebounce'
-import ModalWarning from 'components/Modal/ModalWarning/ModalWarning'
 import Web3 from 'web3'
-import { miniABI } from 'components/ExchangeIntroForm/_assets/miniABI'
+import BigNumber from 'bignumber.js'
+import { erc20ABI } from 'abis/erc20ABI'
+import { waitTransaction } from 'utils/exchangerInteraction'
 
 const ExchangeIntroForm = ({ className, deviceType }) => {
   const dispatch = useDispatch()
   const loadingState = useSelector(state => state.data.loadingState)
   const userWallet = useSelector(state => state.data.userWallet)
   const tokens = useSelector(state => state.data.availableTokens)
-    .map(({ symbol, name, address }) => ({
+    .map(({ symbol, name, address, decimals }) => ({
       label: symbol,
       value: address,
       descriptor: name,
-      icon: IconBitcoin
+      icon: IconBitcoin,
+      decimals
     }))
 
-  const { register, control, watch, setValue, handleSubmit, getValues } = useForm()
+  const fromValue = useSelector(state => state.data.exchangeEstimate.fromTokenAmount)
+  const { register, control, watch, setValue, handleSubmit, getValues } = useForm({
+    defaultValues: {
+      [`source-input`]: fromValue
+    }
+  })
   const defaultSource = tokens.find(item => item.label === 'USDT')
   const selectedSource = watch('source', defaultSource)
   const valueSource = watch('source-input') || 0
   const debouncedSourceValue = useDebounce(+valueSource, 1000)
-  const defaultResult = tokens[1]
+  const defaultResult = tokens.find(item => item.label === 'DAI')
   const selectedResult = watch('result', defaultResult) || {}
   // const radioFee = watch('radio input gas-fee')
   // const inputFee = watch('manual input gas-fee')
 
-  const handleExchangeClick = data => {
+  const handleExchangeClick = (data, selectedSource) => {
+    const web3 = new Web3(window.ethereum)
+    const tokenInstance = new web3.eth.Contract(erc20ABI, selectedSource.value)
+    const amountToExchange = data[`source-input`]
+    const amountToExchangeWithDecimals = new BigNumber(amountToExchange).shiftedBy(data.source.decimals).toFixed()
+    let transactionHash = null
+
     const dataRequest = {
       addressFrom: userWallet,
-      amount: 1,
+      amount: Number((+fromValue).toFixed(2)),
       from: data.source.label,
       to: data.result.label
     }
 
+    dispatch(setLoadingState(LoadingStates.ESTIMATE_LOADING))
     axiosCarrota.post('/exchange/swap', dataRequest)
       .then(response => {
-        const {to, gas, gasPrice, value, data} = response.data
+        dispatch(setLoadingState(LoadingStates.ESTIMATE_LOADED))
+        const { to, gas, gasPrice, data } = response.data
+        console.log(response.data)
 
         const dataExchange = {
           from: userWallet,
           to,
-          gas: `0x${(+gas).toString(16)}`,
+          gas: `0x${(gas).toString(16)}`,
           gasPrice: `0x${(+gasPrice).toString(16)}`,
-          // value: `0x${(+value).toString(16)}`,
           data
         }
 
-        const web3 = new Web3(window.ethereum)
-        const decimals = web3.utils.toBN(selectedSource.decimals)
-        const amount = web3.utils.toBN(dataRequest.amount)
-        const contract = new web3.eth.Contract(miniABI, selectedSource.value)
-        const valueToSend = amount.mul(web3.utils.toBN(10).pow(decimals))
-        // contract.methods.balanceOf(userWallet)
-        //   .call()
-        //   .then(response => {
-        //     console.log(response)
-        //   })
+        dispatch(setLoadingState(LoadingStates.APPROVE_IN_PROCESS))
+        tokenInstance.methods.approve(`0xe4c9194962532feb467dce8b3d42419641c6ed2e`, amountToExchangeWithDecimals).send({ from: userWallet }, async function(error, txHash) {
+          if (error) {
+            console.log("ERC20 could not be approved", error);
+            dispatch(setLoadingState(LoadingStates.APPROVE_ERROR))
+            return;
+          }
+          console.log("ERC20 token approved");
+          dispatch(setLoadingState(LoadingStates.APPROVE_SUCCESS))
+          transactionHash = txHash
+          const status = await waitTransaction(web3, txHash);
+          if (!status) {
+            console.log("Approval transaction failed.");
+            return;
+          }
 
-        contract.methods.transfer(to, valueToSend).send({ ...dataExchange }).on('transactionHash', hash => {
-          console.log(hash)
-          localStorage.setItem('lastTransactionHash', hash)
+          web3.eth.sendTransaction({...dataExchange})
+            .then(response => {
+              console.log(response)
+              localStorage.setItem('lastTransactionBoneHash', transactionHash)
+            })
+            .catch(error => {
+              console.log('Send transaction error!')
+              console.log(error)
+            })
         })
+      })
+      .catch(error => {
+        console.log('Swap error!')
+        console.log(error)
+        dispatch(setLoadingState(LoadingStates.ESTIMATE_ERROR))
       })
   }
 
@@ -100,7 +131,7 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
 
   return (
     <div className={classnames(css.wrapper, className)}>
-      <form onSubmit={handleSubmit(handleExchangeClick)}>
+      <form onSubmit={handleSubmit(data => handleExchangeClick(data, selectedSource))}>
         <div className={css.currencies}>
           {loadingState === LoadingStates.TOKENS_LOADING &&
             <Preloader className={css.preloader} />
@@ -119,6 +150,7 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
               selectedResult={selectedResult}
               getValues={getValues}
               setValue={setValue}
+              isLoading={loadingState === LoadingStates.ESTIMATE_LOADING || loadingState === LoadingStates.APPROVE_IN_PROCESS}
             />
           }
         </div>

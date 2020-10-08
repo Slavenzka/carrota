@@ -21,13 +21,12 @@ const Calculator = ({
   selectedResult,
   getValues,
   setValue,
+  isLoading
 }) => {
   const dispatch = useDispatch()
-  const loadingState = useSelector(state => state.data.loadingState)
   const exchangeEstimate = useSelector(state => state.data.exchangeEstimate)
   const userBalance = useSelector(state => state.data.userBalance)
   const { fromTokenAmount, toTokenAmount } = exchangeEstimate
-  const isLoading = loadingState === LoadingStates.ESTIMATE_LOADING
 
   useEffect(() => {
     const { source, result } = getValues()
@@ -64,7 +63,7 @@ const Calculator = ({
         isWalletConnected={userWallet}
         setValue={setValue}
         getValues={getValues}
-        menuIsOpen={true}
+        isLoading={isLoading}
       />
       <InfoBlock
         className={css.item}
@@ -80,6 +79,7 @@ const Calculator = ({
         legend=''
         setValue={setValue}
         getValues={getValues}
+        isLoading={isLoading}
         isInputDisabled
       />
     </>

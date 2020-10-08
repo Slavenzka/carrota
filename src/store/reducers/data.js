@@ -12,7 +12,7 @@ const initialState = {
   userWallet: '',
   userBalance: 0,
   exchangeEstimate: {
-    fromTokenAmount: 0,
+    fromTokenAmount: 1,
     toTokenAmount: 0,
   },
   searchQuery: ''

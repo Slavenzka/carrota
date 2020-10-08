@@ -23,7 +23,7 @@ const InfoBlock = ({
   isInputDisabled,
   setValue,
   getValues,
-  menuIsOpen
+  isLoading
 }) => {
   const currency = selectedCurrency || defaultCurrency
   const filteredOptions = options.filter(item => item.value !== currency.value)
@@ -54,7 +54,7 @@ const InfoBlock = ({
         register={register}
         name={`${namespace}-input`}
         defaultValue={amount}
-        isDisabled={isInputDisabled}
+        isDisabled={isLoading || isInputDisabled}
         inputType={InputTypes.CALCULATOR}
       />
       {!isNaN(balance) && isWalletConnected &&
@@ -72,7 +72,7 @@ const InfoBlock = ({
         icon={icon}
         type={SelectStyleTypes.CURRENCY}
         isCalculator
-        menuIsOpen={menuIsOpen}
+        isDisabled={isLoading}
       />
       <p className={css.legend}>
         { legend }
