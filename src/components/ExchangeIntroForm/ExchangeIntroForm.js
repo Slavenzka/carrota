@@ -100,7 +100,7 @@ const ExchangeIntroForm = ({ className, deviceType }) => {
           web3.eth.sendTransaction({...dataExchange})
             .then(response => {
               console.log(response)
-              localStorage.setItem('lastTransactionBoneHash', transactionHash)
+              localStorage.setItem('lastTransactionCarrotaHash', transactionHash)
             })
             .catch(error => {
               console.log('Send transaction error!')
