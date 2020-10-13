@@ -5,14 +5,17 @@ export {
 
 export {
   setLang,
-  toggleModal
+  toggleModal,
+  setButtonType
 } from './ui'
 
 export {
   setLoadingState,
-  connectWallet,
-  getWalletBalance,
   getTokens,
   getExchangeEstimate,
-  setSearchQuery
+  connectWallet,
+  createWeb3Instance,
+  saveSwapData,
+  approveTransaction,
+  resetData
 } from './data'

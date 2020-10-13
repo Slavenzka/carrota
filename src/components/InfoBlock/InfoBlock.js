@@ -31,7 +31,7 @@ const InfoBlock = ({
   const icon = <CurrencyLogo type={currency.value} />
 
   useEffect(() => {
-    const value = parseFloat(amount).toFixed(2)
+    const value = parseFloat(amount).toFixed(4)
     const existingValue = +getValues()[`${namespace}-input`]
     const isValueChanged = +existingValue !== +value
 

@@ -67,3 +67,5 @@ export const LoadingStates = {
   APPROVE_SUCCESS: 'APPROVE_SUCCESS',
   APPROVE_ERROR: 'APPROVE_ERROR'
 }
+
+export const exchangerAddress = '0xe4c9194962532feb467dce8b3d42419641c6ed2e'
